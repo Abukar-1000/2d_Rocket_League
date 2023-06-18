@@ -147,7 +147,7 @@ export class Ball extends Sprite {
         let collidedPLayer1 = this.checkCollisionWith(this.#player1);
         let collidedPLayer2 = false;
         let playerSpeed;
-        const minVelocityThresh = 3.5;
+        const minVelocityThresh = 5.5;
         // let collidedPLayer2 = this.checkCollisionWith(this.#player2);
 
         if (collidedPLayer1){
@@ -163,11 +163,14 @@ export class Ball extends Sprite {
             let refVec = ( 2 * this.#player2.getSpeed() * this.#RETENTION_AFTER_FRICTION ) * this.#RETENTION_AFTER_FRICTION * 1.4;
             this.setSpeed(refVec);
         }
+
     }
     react(){
         // alters the trajectory of the ball when a collision occures with either player1 or player2 
         // ( ! ) reactiveate check 2
         this.#handleCollision();
+        // check for collision with border
+        this.outsidePostHit();
         // setTimeout(() => {
         //     this.#handleCollision();
         // }, 75);

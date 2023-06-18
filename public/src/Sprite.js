@@ -26,7 +26,7 @@ export class Sprite {
     #imgAngle 
     #moveAngle 
     #speed 
-    #visible 
+    // #visible 
     #boundAction 
     // initialize attributes
     constructor(scene, imageFile, width, height){
@@ -43,9 +43,40 @@ export class Sprite {
         this.#height = height;
         this.#cHeight = parseInt(this.#canvas.height);
         this.#cWidth = parseInt(this.#canvas.width);
-        this.#visible = true;
+        this.visible = true;
         this.#boundAction = BOUNDARY_ACTIONS.BOUNCE;
         this.camera = false;
+        // recalculate post dimensions
+        let midpoint = 250;
+        this.postPostitions = {
+            leftPost: {
+                x1: this.#width,
+                y1: midpoint - this.#height,
+
+                x2: 5,
+                y2: midpoint - this.#height,
+                
+                x3: 5,
+                y3: midpoint + this.#height,
+                
+                x4: this.#width,
+                y4: midpoint + this.#height,
+            },
+            
+            rightPost: {
+                x1: 900 - this.#width,
+                y1: midpoint - this.#height,
+                
+                x2: 895,
+                y2: midpoint - this.#height,
+                
+                x3: 895,
+                y3: midpoint + this.#height,
+                
+                x4: 900 - this.#width,
+                y4: midpoint + this.#height,
+            }
+        };
 
         // movement
         this.#x = 100;
@@ -120,7 +151,6 @@ export class Sprite {
         
         if (this.#y > BORDER_DATA.bottomBorder){
             FLAGS.offBottom = true;
-            // console.log(this.#x,this.#y);
         }
         
         // respond to potential out of bounds
@@ -152,7 +182,6 @@ export class Sprite {
         this.#imgAngle += radians;
     }
     
-    
     // public methods
     changeImage(imgPath){
         // given a path changes the image, purpose is to be a setter
@@ -169,6 +198,44 @@ export class Sprite {
         this.#changeMoveAngleBy(degrees);
     }
     
+    setDimension(width, height){
+        // setter when goal post class inherits this class 
+        this.#height = height;
+        this.#width = width;
+        
+        // recalculate post dimensions
+        let midpoint = 250;
+        this.postPostitions = {
+            leftPost: {
+                x1: this.#width,
+                y1: midpoint - this.#height,
+
+                x2: 5,
+                y2: midpoint - this.#height,
+                
+                x3: 5,
+                y3: midpoint + this.#height,
+                
+                x4: this.#width,
+                y4: midpoint + this.#height,
+            },
+            
+            rightPost: {
+                x1: 900 - this.#width,
+                y1: midpoint - this.#height,
+                
+                x2: 895,
+                y2: midpoint - this.#height,
+                
+                x3: 895,
+                y3: midpoint + this.#height,
+                
+                x4: 900 - this.#width,
+                y4: midpoint + this.#height,
+            }
+        };
+    }
+
     setPosition(x,y){
         // alters the position of the center, purpose is to be a setter
         this.#x = x;
@@ -225,15 +292,15 @@ export class Sprite {
     // might merge into a toggle meth
     show(){
         // if hidden shows the sprite
-        this.#visible = true;
+        this.visible = true;
     }
     hide(){
         // if visible hides the sprite
-        this.#visible = false;
+        this.visible = false;
     }
     getVisibility(){
         // returns the visible state of the sprite
-        return this.#visible;
+        return this.visible;
     }
     getXPos(){
         // returns the private x position
@@ -264,22 +331,42 @@ export class Sprite {
         return this.#dy;
     }
     update(){
-        // updates the sprite on the canvas adn its internal state.
+        // updates the sprite on the canvas and its internal state.
         this.#x += this.#dx;
         this.#y += this.#dy;
         
         this.#checkBounds();
-        // console.log(this.#visible);
-        if (this.#visible) {
+        // console.log(this.visible);
+        if (this.visible) {
             this.#draw();
         }
-        // (this.#visible)? this.#draw(): this.#draw();
+        // (this.visible)? this.#draw(): this.#draw();
     }
     
+    outsidePostHit(){
+
+        const leftPost = this.postPostitions.leftPost;
+        const rightPost = this.postPostitions.rightPost;
+        const [objectX, objectY] = [this.#x, this.#y];
+        const touchedLeftUpperBar = (objectY >= leftPost.y1 || objectY <= leftPost.y1) && 
+                                    (objectX > leftPost.x2 && objectX < leftPost.x1)
+                                    && (this.visible);
+
+        let outsideHit = false;
+        // check outside region of left post
+        if (touchedLeftUpperBar) {
+            console.log(`STATE: ${touchedLeftUpperBar}`);
+            outsideHit = true;
+        }
+
+        if (outsideHit) {
+            this.#dy *= -1;
+        }
+    }
     checkCollisionWith(OtherSprite){
         // checks if a collision occured between 2 sprites
         let collided = false;
-        let bothSpritesVisible = this.#visible && OtherSprite.getVisibility();
+        let bothSpritesVisible = this.visible && OtherSprite.getVisibility();
         
         if (bothSpritesVisible){
             const BOUNDS = {

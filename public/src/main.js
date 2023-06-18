@@ -3,6 +3,8 @@ import { Keyboard, Mouse } from "./UserInput.js";
 import { BOUNDARY_ACTIONS, Sprite } from "./Sprite.js";
 import {Car} from "./Car.js";
 import { Ball } from "./Ball.js";
+import { GoalPosts } from "./GoalPost.js";
+
 
 // alert("hey")
 var keyboard;
@@ -12,6 +14,7 @@ var scene;
 var car;
 var car2;
 var ball;
+var goalPosts;
 
 // initialize values
 function init() {
@@ -25,6 +28,7 @@ function init() {
     car = new Car(scene, "ySportsCar.png", 50, 30, keyboard);
     // ball = new Sprite(scene, "ballSprite.png", 25, 25);
     ball = new Ball(scene, "ballSprite.png", 25, 25, car, null);
+    goalPosts = new GoalPosts(scene, ball);
 
     // initialize values
     car.setPosition(200,200);
@@ -83,6 +87,7 @@ function reactToCollision(){
 // this is the update function
 function main() {
     scene.clearScreen();
+    goalPosts.update();
     car.update();
     ball.update();
     // reactToCollision();

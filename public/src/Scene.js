@@ -16,7 +16,6 @@ class Scene {
     #top;
     // initialize data
     constructor(width, height, keyboard, mouse){
-        // Scene.canvas = ;
         Scene.canvas.style.backgroundColor = "grey";
         // insert canvas into DOM
         document.body.appendChild(Scene.canvas);
