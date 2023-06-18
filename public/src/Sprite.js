@@ -330,6 +330,14 @@ export class Sprite {
         // returns the private dy attribute of the sprite
         return this.#dy;
     }
+    getImageAngle(){
+        // returns the private image angle attribute of the sprite
+        return this.#imgAngle;
+    }
+    getMotionAngle(){
+        // returns the private motion angle attribute of the sprite
+        return this.#moveAngle;
+    }
     update(){
         // updates the sprite on the canvas and its internal state.
         this.#x += this.#dx;
@@ -348,15 +356,14 @@ export class Sprite {
         const leftPost = this.postPostitions.leftPost;
         const rightPost = this.postPostitions.rightPost;
         const [objectX, objectY] = [this.#x, this.#y];
-        const touchedLeftUpperBar = (objectY >= leftPost.y1 || objectY <= leftPost.y1) && 
-                                    (objectX > leftPost.x2 && objectX < leftPost.x1)
-                                    && (this.visible);
 
-        let outsideHit = false;
+        const region1NotTouched = (objectY !== leftPost.y1 && objectX > leftPost.x1) && (this.visible);
+
+        let outsideHit = true;
         // check outside region of left post
-        if (touchedLeftUpperBar) {
-            console.log(`STATE: ${touchedLeftUpperBar}`);
-            outsideHit = true;
+        if (region1NotTouched) {
+            outsideHit = false;
+            // console.log(`STATE: ${outsideHit}`);
         }
 
         if (outsideHit) {

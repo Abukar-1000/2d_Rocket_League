@@ -50,8 +50,6 @@ export class Ball extends Sprite {
     #bounceBall(playerPosition){
         // based on where the ball was comming from inverts dx and dy or increases it
         
-        // let offTopOrBottom =this.#FLAGS.offTop ||this.#FLAGS.offBottom;
-        // let offLeftOrRight =this.#FLAGS.offLeft ||this.#FLAGS.offRight;
         const speedUpFactor = 3.5;
         const POSITION_PADDING = 3;
         let [dx, dy] = [this.getDx(), this.getDy()];
@@ -104,6 +102,8 @@ export class Ball extends Sprite {
         // check upper & lower boundries of ball
         const underBallCheck = ballYPos - (player.getHeight() / 2);
         const overBallCheck = ballYPos + (player.getHeight() / 2);
+        let [dx, dy] = [this.getDx(), this.getDy()];
+        let [x, y] = [this.getXPos(), this.getYPos()];
         
         
         // add a padding factor to move ball and reduce collisions 
@@ -132,11 +132,45 @@ export class Ball extends Sprite {
             // this.setX(ballXPos + POSITION_PADDING);
         }
 
-        // move the ball 
-        this.#bounceBall({
-            playerXPos: playerXPos,
-            playerYPos: playerYPos
-        });
+        // if (this.#FLAGS.offTop) {
+        //     y -= POSITION_PADDING;
+        // } 
+        // if (this.#FLAGS.offBottom) {
+        //     y += POSITION_PADDING;
+        // } 
+        // if (this.#FLAGS.offLeft) {
+        //     x -= POSITION_PADDING;
+        // } 
+        // if (this.#FLAGS.offRight) {
+        //     x += POSITION_PADDING;
+        // }
+
+        // // move the ball 
+        // this.#bounceBall({
+        //         playerXPos: playerXPos,
+        //         playerYPos: playerYPos
+        //     });
+        if (this.#FLAGS.offTop || this.#FLAGS.offBottom){
+            dy *= -1;
+        }
+        if (this.#FLAGS.offLeft || this.#FLAGS.offRight){
+            dx *= -1;
+        }
+
+        const ballXVelocity = this.getDx() * this.getXPos();
+        const ballYVelocity = this.getDy() * this.getYPos();
+        const carXVelocity = player.getDx() * player.getXPos();
+        const carYVelocity = player.getDy() * player.getYPos();
+        const relativeXVelocity = ballXVelocity - carXVelocity;
+        const relativeYVelocity = ballYVelocity - carYVelocity;
+        
+        let angle = Math.atan2(relativeYVelocity, relativeXVelocity);
+        this.changeAngleBy(this.getMotionAngle() + angle);
+        // alter values
+        // this.setDx(dx);
+        // this.setDy(dy);
+        // this.setX(x);
+        // this.setY(y);
 
         
         // this.reactToBounce(this.#FLAGS);
