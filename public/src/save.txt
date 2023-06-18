@@ -1,0 +1,43 @@
+       // if (ballYPos >= overBallCheck){
+        //     console.log("Bottom");
+        //     FLAGS.offTop = true;
+        //     // this.setDy(this.getDy() + POSITION_PADDING)
+        //     this.setY(ballYPos - POSITION_PADDING);
+        // }
+        
+        // if (ballYPos <= underBallCheck){
+        //     console.log("Top");
+        //     FLAGS.offBottom = true;
+        //     // this.setDy(this.getDy() + POSITION_PADDING)
+        //     this.setY(ballYPos + POSITION_PADDING);
+        // }
+        if (ballXPos < playerXPos){
+            console.log("left");
+            FLAGS.offLeft = true;
+            // newX = ballXPos - POSITION_PADDING;
+            // this.setX(ballXPos + POSITION_PADDING);
+        }
+        
+        if (ballXPos > playerXPos){
+            console.log("Right");
+            FLAGS.offRight = true;
+            // newX = ballXPos + POSITION_PADDING;
+            // this.setX(ballXPos - POSITION_PADDING);
+        }
+        if (ballYPos <= playerYPos){
+            console.log("Top");
+            FLAGS.offTop = true;
+            // newY = ballYPos - POSITION_PADDING;
+            // this.setY(ballYPos - POSITION_PADDING);
+        }
+        
+        if (ballYPos >= playerYPos){
+            console.log("Bottom");
+            FLAGS.offBottom = true;
+            // newY = ballYPos + POSITION_PADDING;
+            // this.setY(ballYPos + POSITION_PADDING);
+        }
+        
+        this.reactToBounce(FLAGS);
+        this.setX(newX);
+        this.setY(newY);
