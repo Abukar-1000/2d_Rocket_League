@@ -3,7 +3,7 @@ import { Keyboard, Mouse } from "./UserInput.js";
 import { BOUNDARY_ACTIONS, Sprite } from "./Sprite.js";
 import {Car} from "./Car.js";
 import { Ball } from "./Ball.js";
-import { GoalPosts } from "./GoalPost.js";
+import { GoalPosts, GoalPost } from "./GoalPost.js";
 
 
 // alert("hey")
@@ -11,10 +11,12 @@ var keyboard;
 var keyboardState;
 var mouse;
 var scene;
-var car;
-var car2;
+var player1;
+var player2;
 var ball;
 var goalPosts;
+var leftGoalPost;
+var rightGoalPost;
 
 // initialize values
 function init() {
@@ -25,17 +27,18 @@ function init() {
     mouse = new Mouse();
     scene = new Scene(null,null,keyboard,mouse);
     // car = new Sprite(scene, "ySportsCar.png", 50, 30);
-    car = new Car(scene, "ySportsCar.png", 50, 30, keyboard);
+    player1 = new Car(scene, "ySportsCar.png", 50, 30, keyboard);
     // ball = new Sprite(scene, "ballSprite.png", 25, 25);
-    ball = new Ball(scene, "ballSprite.png", 25, 25, car, null);
-    goalPosts = new GoalPosts(scene, ball);
+    ball = new Ball(scene, "ballSprite.png", 25, 25, player1, null);
+    // goalPosts = new GoalPosts(scene, ball);
 
+    leftGoalPost = new GoalPost(scene, player1, player2, ball, "left");
+    rightGoalPost = new GoalPost(scene,player1, player2, ball, "right");
     // initialize values
-    car.setPosition(200,200);
+    player1.setPosition(200,200);
     // set up event listeners
     keyboard.updateState(document)
     mouse.updateState(document)
-    console.log(car)
     scene.start(main);
     
 }
@@ -67,19 +70,19 @@ function applyFriction(){
     const FRICTION_REDUCTION_FOR_BALL = 0.98;
     const FRICTION_REDUCTION_FOR_CAR = 0.96;
     ball.setSpeed(ball.getSpeed() * FRICTION_REDUCTION_FOR_BALL);
-    car.setSpeed(car.getSpeed() * FRICTION_REDUCTION_FOR_CAR);
+    player1.setSpeed(player1.getSpeed() * FRICTION_REDUCTION_FOR_CAR);
 
 }
 
 function reactToCollision(){
     // alters the trajectory of the ball and plays a sound if it collides with the car
     const CAR_MASS = .9;
-    let collided = car.checkCollisionWith(ball);
+    let collided = player1.checkCollisionWith(ball);
     if (collided){
         console.log(`collision: (${ball.getXPos()}, ${ball.getYPos()})`)
         // ball.changeAngleBy(25);
         // account for force
-        let force = CAR_MASS * car.getSpeed();
+        let force = CAR_MASS * player1.getSpeed();
 
         ball.setSpeed(force);
     }
@@ -87,14 +90,14 @@ function reactToCollision(){
 // this is the update function
 function main() {
     scene.clearScreen();
-    goalPosts.update();
-    car.update();
+    leftGoalPost.update();
+    rightGoalPost.update();
+    player1.update();
     ball.update();
     // reactToCollision();
     ball.react();
-    car.control();
-    // controlCar()
-    applyFriction();
+    player1.control();
+    // applyFriction();
 }
 
 // runs app when document has loaded 

@@ -132,24 +132,6 @@ export class Ball extends Sprite {
             // this.setX(ballXPos + POSITION_PADDING);
         }
 
-        // if (this.#FLAGS.offTop) {
-        //     y -= POSITION_PADDING;
-        // } 
-        // if (this.#FLAGS.offBottom) {
-        //     y += POSITION_PADDING;
-        // } 
-        // if (this.#FLAGS.offLeft) {
-        //     x -= POSITION_PADDING;
-        // } 
-        // if (this.#FLAGS.offRight) {
-        //     x += POSITION_PADDING;
-        // }
-
-        // // move the ball 
-        // this.#bounceBall({
-        //         playerXPos: playerXPos,
-        //         playerYPos: playerYPos
-        //     });
         if (this.#FLAGS.offTop || this.#FLAGS.offBottom){
             dy *= -1;
         }
@@ -166,11 +148,6 @@ export class Ball extends Sprite {
         
         let angle = Math.atan2(relativeYVelocity, relativeXVelocity);
         this.changeAngleBy(this.getMotionAngle() + angle);
-        // alter values
-        // this.setDx(dx);
-        // this.setDy(dy);
-        // this.setX(x);
-        // this.setY(y);
 
         
         // this.reactToBounce(this.#FLAGS);
@@ -178,6 +155,7 @@ export class Ball extends Sprite {
     }
     #handleCollision(){
         // helper function to abstract reacting to the ball so we can time reactions
+        // handles all ball collisions 
         let collidedPLayer1 = this.checkCollisionWith(this.#player1);
         let collidedPLayer2 = false;
         let playerSpeed;
@@ -205,9 +183,6 @@ export class Ball extends Sprite {
         this.#handleCollision();
         // check for collision with border
         this.outsidePostHit();
-        // setTimeout(() => {
-        //     this.#handleCollision();
-        // }, 75);
-        // this.setY( this.getYPos() - 1);
+
     }
 }

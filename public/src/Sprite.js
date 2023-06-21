@@ -183,6 +183,11 @@ export class Sprite {
     }
     
     // public methods
+    setImageAngleStrict(degrees){
+        // alters the image angle value given an exact theta in degrees
+        let radians = degrees * (Math.PI / 180);
+        this.#imgAngle = radians;
+    }
     changeImage(imgPath){
         // given a path changes the image, purpose is to be a setter
         this.#setImage(imgPath);
@@ -332,7 +337,7 @@ export class Sprite {
     }
     getImageAngle(){
         // returns the private image angle attribute of the sprite
-        return this.#imgAngle;
+        return this.#imgAngle * (180/ Math.PI);
     }
     getMotionAngle(){
         // returns the private motion angle attribute of the sprite
@@ -344,11 +349,9 @@ export class Sprite {
         this.#y += this.#dy;
         
         this.#checkBounds();
-        // console.log(this.visible);
         if (this.visible) {
             this.#draw();
         }
-        // (this.visible)? this.#draw(): this.#draw();
     }
     
     outsidePostHit(){

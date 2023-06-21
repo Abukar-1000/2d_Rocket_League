@@ -69,3 +69,110 @@ export class GoalPosts extends Sprite {
         this.#draw();   
     }
 }
+
+
+export class GoalPost {
+
+    #backPost;
+    #topPost;
+    #bottomPost;
+    #goalType;
+    #minChange;
+    #player1;
+    #player2;
+    #ball;
+    // remove x, y
+    constructor(scene, player1, player2, ball, goalType){
+        // Binary tree like class which represents a goal post 
+        // constructed with a left post, right post, and back post ( parent ) all are instances in this class
+        // initialize nested classes with dimension values 
+        this.#backPost = new Sprite(scene, "postBack.png", 10, 200);
+        this.#topPost = new Sprite(scene, "postSide.png", 150, 10);
+        this.#bottomPost = new Sprite(scene, "postSide.png", 150, 10);
+
+        // 
+        this.#player1 = player1;
+        this.#player2 = player2;
+        this.#ball = ball;
+        // this makes it seem like the goal post is not moving, will help rotate later
+        this.#minChange = 0.0000000000001;
+        // specify left or right goal
+        this.#goalType = goalType;
+        
+        this.#initializeNet();
+        
+    }
+    #initializeNet(){
+        // place the goal on screen based on if the goal is a left goal or a right goal
+        if (this.#goalType === "left"){
+            // place the back side of the goal then position other 2 sides with respect to the back post
+            this.#backPost.changeAngleBy(180 - this.#backPost.getImageAngle());
+            this.#backPost.setPosition(10,250)
+            
+            // place the top post 
+            this.#topPost.setPosition(15,150);
+            this.#topPost.changeAngleBy(180 - this.#topPost.getImageAngle());
+            // place bottom post
+            this.#bottomPost.setPosition(15,350);
+            this.#bottomPost.changeAngleBy(180 - this.#bottomPost.getImageAngle());
+        } else if (this.#goalType === "right") {
+
+            // place the back side of the goal then position other 2 sides with respect to the back post
+            this.#backPost.changeAngleBy(180 - this.#backPost.getImageAngle());
+            this.#backPost.setPosition(904,250)
+            
+            // place the top post 
+            this.#topPost.setPosition(905,150);
+            this.#topPost.changeAngleBy(180 - this.#topPost.getImageAngle());
+            // place bottom post
+            this.#bottomPost.setPosition(905,350);
+            this.#bottomPost.changeAngleBy(180 - this.#bottomPost.getImageAngle());
+        }
+    }
+    #stopGoalFromMoving(){
+        // minimizes dx and dy to keep the goal stationary
+        // stop the post from moving
+        this.#backPost.setDx(0);
+        this.#backPost.setDy(this.#minChange);
+
+        this.#topPost.setDx(0);
+        this.#topPost.setDy(this.#minChange);
+
+        this.#bottomPost.setDx(0);
+        this.#bottomPost.setDy(this.#minChange);
+
+    }
+    #handleCollision(otherSprite){
+        // handles the collisions of various object with respect to the goal post on the screen
+        let collisionWithSides = (
+            this.#bottomPost.checkCollisionWith(otherSprite) ||
+            this.#topPost.checkCollisionWith(otherSprite)
+        );
+
+        let collidesWithBack = this.#backPost.checkCollisionWith(otherSprite);
+        if (collisionWithSides){
+            console.log("collides with side")
+            // invert their y velocity & speed them up a bit
+            otherSprite.setDy(otherSprite.getDy() * -0.2);
+        } else if (collidesWithBack){
+            console.log("collides with bottomd")
+            otherSprite.setDx(otherSprite.getDx() * -0.2);
+        }
+
+    }
+    checkForGoal(){
+        // returns true if a goal was scored else false
+    }
+    update(){
+
+        this.#stopGoalFromMoving();
+        this.#initializeNet();
+
+        // check for collisions
+        this.#handleCollision(this.#ball);
+        // put goal on screen  
+        this.#backPost.update();
+        this.#topPost.update();
+        this.#bottomPost.update();
+    }
+}
