@@ -163,7 +163,6 @@ export class Ball extends Sprite {
     }
     react(){
         // alters the trajectory of the ball when a collision occures with either player1 or player2 
-        // ( ! ) reactiveate check 2
         this.#handleCollision();
 
     }

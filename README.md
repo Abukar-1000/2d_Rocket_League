@@ -26,7 +26,8 @@ Here is a list of all the classes Ill be using in game:
 * Car.js
 * Ball.js
 
-Since `Main.js` has been covered already, I will now explain the rest. </br>
+Since `Main.js` has been covered already, I will now explain the rest. Lastly no game object dies, due</br>
+to the nature of Rocket League.
 
 ### GoalPost.js
 Encapsulates all the functionality of a goal post in a rocket league match. There will be two instacnce </br> 
@@ -50,7 +51,74 @@ Here are the encapsulated functionalities:
 
 All of the above functionality will be abstracted away in the `update()` function.
 
+### Car.js
+Encapsulates all the fucntionalities of a car in Rocket League. Furthermore, is </br>
+a child of the `Sprite` class, which allows it to inherit a lot of usefull features </br>
+from the `Sprite` class. These faeatures include: </br>
+* Collision Detection
+* Affine Transformations
+* Image Encapsulation
 
+With these usefull inheritence the only custom functionality needed is a way to control the </br>
+car. Depeninding on which player you want to control, the controls will differ. </br>
+Here are the controls: </br>
+</br>
+
+* Player 1
+    * `W`: Go forward.
+    * `S`: Stop or go backward.
+    * `D`: Turn right.
+    * `A`: Turn Left.
+</br>
+
+* Player 2
+    * `UP Arrow`: Go forward.
+    * `Down Arrow`: Stop or go backward.
+    * `Right Arrow`: Turn right.
+    * `Left Arrow`: Turn Left.
+</br>
+
+When a collision occures between a ball and a car, the collision will be handled </br>
+in the `Ball` class. Furthermore, I've decided to check for collisions only between:
+</br>
+
+* Ball Vs player
+* Ball Vs goal post.
+This is because, due to the reactive nature of the ball, there might be a loop of </br>
+collisions if we also check for car to car collisions. To avoid a possible loop, and </br>
+maximize game performance there is no collision detection between two cars. <br>
+
+Another challenging issue is having a larger screen. If the dimensions of the canvas </br>
+exceed 1000 pixels in width, we start to have the following issues:
+* Not gurenteed to have a constant canvas size.
+    * Might have to use css to dynamically adjust the canvas size.
+* Significant imapact to game play performance, depending on the device's graphic resources.
+
+For the above reasons, I've decided to stick with a maximum width of 900 pixels. I </br>
+believe this will provide substancial space, without a noticeble difference on performance. </br>
+For refference this is all based on performance output from my local machine. </br>
+
+To make the game more fun, the goal posts wont collide with a player. </br>
+This means that players can easily move in, and out of the net to intercept a </br>
+goal before it hits the back of the net. 
+</br>
+
+Lastly, the only events that cause a state change to the car class is either:
+* User input to change the car's trajectory.
+* The car colliding with the borders of the canvas.
+ 
+### Ball.js
+Encapsulates all the functionalities required by a ball in the game. The ball will be </br>
+the most reactive game element in my game. For this reason, I expect the majority of </br>
+collisions to be caused by the `Ball` class. <br>
+
+Here are the functionalities:
+* Bounce 
+    * After colliding with another game object the ball will either invert its dx or dy.
+* Handle Collisions
+
+Lastly, contrary to all the other classes, the state of the `Ball` class is updated in </br>
+the `react()` method. I just personally think
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
