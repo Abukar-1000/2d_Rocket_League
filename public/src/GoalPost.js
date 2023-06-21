@@ -70,7 +70,7 @@ export class GoalPosts extends Sprite {
     }
 }
 
-// ive allowed overlaps between the player sprites so that if the ball is near by than collisions only happen between ball and player, and not ball to player and player to player
+// ive allowed overlaps between the player sprites so that if the ball is near by than collisions only happen between ball and player, and not ball to player and player to player``    
 export class GoalPost {
 
     #backPost;
@@ -203,9 +203,6 @@ export class GoalPost {
 
         }
 
-    }
-    checkForGoal(){
-        // returns true if a goal was scored else false
     }
     update(){
 
