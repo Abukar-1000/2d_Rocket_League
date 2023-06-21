@@ -22,24 +22,33 @@ For each class or file used here is the functional documentation:
 ### Overview
 In this game there really only is 1 scene, the main scene. For this reason I decided to encapsulate this </br> inside the file main.js. Hence the name main. In the main scene we will first initialize all our </br> class instances globally using the var keyword. I am doing this because I am initializing all </br> instances in the function `init()`, therefore I would like them to be available globally. </br> 
 Here is a list of all the classes Ill be using in game:
-
-* Main.js
-* Scene.js
-* Sprite.js
 * GoalPost.js
 * Car.js
 * Ball.js
-* Keyboard.js
-* Mouse.js 
 
 Since `Main.js` has been covered already, I will now explain the rest. </br>
-### Scene.js
 
-Encapsulates all the functionality I plan on using from the canvas DOM element. 
-Here are those functionalities:
-* Initialize the score board at the start of the game.
-* Start my main game loop.
-* Stop the main game loop.
+### GoalPost.js
+Encapsulates all the functionality of a goal post in a rocket league match. There will be two instacnce </br> 
+of the `GoalPost` class. The first will represent the left goal post, the second will represent the right </br>
+goal post. Furthermore, `player1` will be assigned to the left goal post, and `player2` will be assigned to the </br>
+right. When a player is assigned to a goal post they are in charge of defending the goal post. If the ball hits </br>
+the back of their goal post, the other player will recieve a point. The points are refreshed during every itteration </br> of the game loop. Lastly, the goal post is designed in a tree like structure, but without the recursive nature. </br> Instead I've decided to contructing using three subclasses on the heap.
+
+Here are the encapsulated functionalities:
+* Initializing the given goal net.
+* Stop itself from mooving
+    * This is necissary because the back post of the goal will be rotated.
+    * Once rotated, it's dy will cause it to move. To stop this I've made </br>
+    the dy factor so small that its basically 0. I didn't set it to 0 because </br>
+    0/0 leads to undefined behavior. 
+    * However there is no issue in setting dx to 0, therefore dx is 0.
+* Handle collisions with any one of the three sides of the goal post.
+    * If there is a collision with the top or bottom, the other sprite should bounce.
+    * If there is a collision witht the back post, we then know that the opposing </br>
+    player scored a goal. Therefore, we will update the score and reset the player positions.
+
+All of the above functionality will be abstracted away in the `update()` function.
 
 
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
