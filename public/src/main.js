@@ -26,16 +26,27 @@ function init() {
     keyboardState = keyboard.getKeyArr();
     mouse = new Mouse();
     scene = new Scene(null,null,keyboard,mouse);
-    // car = new Sprite(scene, "ySportsCar.png", 50, 30);
-    player1 = new Car(scene, "ySportsCar.png", 50, 30, keyboard);
-    // ball = new Sprite(scene, "ballSprite.png", 25, 25);
-    ball = new Ball(scene, "ballSprite.png", 25, 25, player1, null);
+    
+    // create player 1
+    player1 = new Car(scene, "ySportsCar.png", 50, 30, keyboard, "player1");
+    player1.setReductionFactor(0.96);
+    
+    // create player 2
+    player2 = new Car(scene, "redCar.png", 50, 40, keyboard, "player2");
+    player2.setReductionFactor(0.96);
+
+    // create ball
+    ball = new Ball(scene, "ballSprite.png", 25, 25, player1, player2);
+    ball.setReductionFactor(0.98);
     // goalPosts = new GoalPosts(scene, ball);
 
     leftGoalPost = new GoalPost(scene, player1, player2, ball, "left");
     rightGoalPost = new GoalPost(scene,player1, player2, ball, "right");
-    // initialize values
+    
+    // car positions
     player1.setPosition(200,200);
+    player2.setPosition(700,200);
+    
     // set up event listeners
     keyboard.updateState(document)
     mouse.updateState(document)
@@ -43,61 +54,27 @@ function init() {
     
 }
 
-// function controlCar(){
-//     const MAX_SPEED = 1.2;
-
-//     if (keyboardState[keyboard.KEY_W]){
-//         let newSpeed;
-//         if (car.getSpeed() < 0.1){
-//             newSpeed = 0.8 * MAX_SPEED;
-//         } else {
-//             newSpeed = Math.min(car.getSpeed(), MAX_SPEED)
-//         }
-//         car.changeSpeedBy(newSpeed);
-//     }
-//     if (keyboardState[keyboard.KEY_S]){
-//         car.changeSpeedBy(-1.2);
-//     }
-//     if (keyboardState[keyboard.KEY_D]){
-//         car.changeAngleBy(4);
-//     }
-//     if (keyboardState[keyboard.KEY_A]){
-//         car.changeAngleBy(-4);
-//     }
-// }
-
 function applyFriction(){
-    const FRICTION_REDUCTION_FOR_BALL = 0.98;
-    const FRICTION_REDUCTION_FOR_CAR = 0.96;
+    const FRICTION_REDUCTION_FOR_BALL = 0.78;
+    const FRICTION_REDUCTION_FOR_CAR = 0.76;
     ball.setSpeed(ball.getSpeed() * FRICTION_REDUCTION_FOR_BALL);
     player1.setSpeed(player1.getSpeed() * FRICTION_REDUCTION_FOR_CAR);
 
 }
 
-function reactToCollision(){
-    // alters the trajectory of the ball and plays a sound if it collides with the car
-    const CAR_MASS = .9;
-    let collided = player1.checkCollisionWith(ball);
-    if (collided){
-        console.log(`collision: (${ball.getXPos()}, ${ball.getYPos()})`)
-        // ball.changeAngleBy(25);
-        // account for force
-        let force = CAR_MASS * player1.getSpeed();
 
-        ball.setSpeed(force);
-    }
-}
 // this is the update function
 function main() {
     scene.clearScreen();
     leftGoalPost.update();
     rightGoalPost.update();
     player1.update();
+    player2.update();
     ball.update();
-    // reactToCollision();
     ball.react();
     player1.control();
-    // applyFriction();
+    player2.control();
+    // console.log(player1.getSpeed(), ball.getSpeed())
 }
 
 // runs app when document has loaded 

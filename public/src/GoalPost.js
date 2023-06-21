@@ -107,7 +107,7 @@ export class GoalPost {
         if (this.#goalType === "left"){
             // place the back side of the goal then position other 2 sides with respect to the back post
             this.#backPost.changeAngleBy(180 - this.#backPost.getImageAngle());
-            this.#backPost.setPosition(10,250)
+            this.#backPost.setPosition(2,250)
             
             // place the top post 
             this.#topPost.setPosition(15,150);

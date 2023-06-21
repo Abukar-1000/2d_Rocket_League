@@ -26,8 +26,10 @@ export class Sprite {
     #imgAngle 
     #moveAngle 
     #speed 
-    // #visible 
+    #visible
+    #FRICTION_REDUCTION 
     #boundAction 
+
     // initialize attributes
     constructor(scene, imageFile, width, height){
         
@@ -43,40 +45,40 @@ export class Sprite {
         this.#height = height;
         this.#cHeight = parseInt(this.#canvas.height);
         this.#cWidth = parseInt(this.#canvas.width);
-        this.visible = true;
+        this.#visible = true;
         this.#boundAction = BOUNDARY_ACTIONS.BOUNCE;
         this.camera = false;
         // recalculate post dimensions
-        let midpoint = 250;
-        this.postPostitions = {
-            leftPost: {
-                x1: this.#width,
-                y1: midpoint - this.#height,
+        // let midpoint = 250;
+        // this.postPostitions = {
+        //     leftPost: {
+        //         x1: this.#width,
+        //         y1: midpoint - this.#height,
 
-                x2: 5,
-                y2: midpoint - this.#height,
+        //         x2: 5,
+        //         y2: midpoint - this.#height,
                 
-                x3: 5,
-                y3: midpoint + this.#height,
+        //         x3: 5,
+        //         y3: midpoint + this.#height,
                 
-                x4: this.#width,
-                y4: midpoint + this.#height,
-            },
+        //         x4: this.#width,
+        //         y4: midpoint + this.#height,
+        //     },
             
-            rightPost: {
-                x1: 900 - this.#width,
-                y1: midpoint - this.#height,
+        //     rightPost: {
+        //         x1: 900 - this.#width,
+        //         y1: midpoint - this.#height,
                 
-                x2: 895,
-                y2: midpoint - this.#height,
+        //         x2: 895,
+        //         y2: midpoint - this.#height,
                 
-                x3: 895,
-                y3: midpoint + this.#height,
+        //         x3: 895,
+        //         y3: midpoint + this.#height,
                 
-                x4: 900 - this.#width,
-                y4: midpoint + this.#height,
-            }
-        };
+        //         x4: 900 - this.#width,
+        //         y4: midpoint + this.#height,
+        //     }
+        // };
 
         // movement
         this.#x = 100;
@@ -86,6 +88,7 @@ export class Sprite {
         this.#imgAngle = 0;
         this.#moveAngle = 0;
         this.#speed = 7;
+        this.#FRICTION_REDUCTION = 0.98;
     }
 
     // private methods
@@ -113,6 +116,16 @@ export class Sprite {
         localContext.restore();
     }
     
+    #applyFriction(){
+        // applies a friction factor to as sprite while it moves
+        const minVelocityThresh = 0.1;
+        let currentSpeed = this.getSpeed();
+        // apply friction
+        currentSpeed = currentSpeed * this.#FRICTION_REDUCTION;
+        currentSpeed = Math.max(currentSpeed, minVelocityThresh);
+        this.setSpeed(currentSpeed);
+    }
+    // remove obj
     #checkBounds() {
         // private helper method to check if we have hit the bounds of the canvas
         
@@ -188,6 +201,10 @@ export class Sprite {
         let radians = degrees * (Math.PI / 180);
         this.#imgAngle = radians;
     }
+    setReductionFactor(factor){
+        // sets the reduction factor of the sprite, so we can apply friction later
+        this.#FRICTION_REDUCTION = factor;
+    }
     changeImage(imgPath){
         // given a path changes the image, purpose is to be a setter
         this.#setImage(imgPath);
@@ -208,37 +225,6 @@ export class Sprite {
         this.#height = height;
         this.#width = width;
         
-        // recalculate post dimensions
-        let midpoint = 250;
-        this.postPostitions = {
-            leftPost: {
-                x1: this.#width,
-                y1: midpoint - this.#height,
-
-                x2: 5,
-                y2: midpoint - this.#height,
-                
-                x3: 5,
-                y3: midpoint + this.#height,
-                
-                x4: this.#width,
-                y4: midpoint + this.#height,
-            },
-            
-            rightPost: {
-                x1: 900 - this.#width,
-                y1: midpoint - this.#height,
-                
-                x2: 895,
-                y2: midpoint - this.#height,
-                
-                x3: 895,
-                y3: midpoint + this.#height,
-                
-                x4: 900 - this.#width,
-                y4: midpoint + this.#height,
-            }
-        };
     }
 
     setPosition(x,y){
@@ -297,15 +283,18 @@ export class Sprite {
     // might merge into a toggle meth
     show(){
         // if hidden shows the sprite
-        this.visible = true;
+        this.#visible = true;
     }
     hide(){
         // if visible hides the sprite
-        this.visible = false;
+        this.#visible = false;
     }
     getVisibility(){
         // returns the visible state of the sprite
-        return this.visible;
+
+        // quick check to make sure it has a value
+        this.#visible = (this.#visible === null)? true : this.#visible;
+        return this.#visible;
     }
     getXPos(){
         // returns the private x position
@@ -347,36 +336,19 @@ export class Sprite {
         // updates the sprite on the canvas and its internal state.
         this.#x += this.#dx;
         this.#y += this.#dy;
-        
+        this.#applyFriction()
+
         this.#checkBounds();
-        if (this.visible) {
+        if (this.#visible) {
             this.#draw();
         }
     }
     
-    outsidePostHit(){
 
-        const leftPost = this.postPostitions.leftPost;
-        const rightPost = this.postPostitions.rightPost;
-        const [objectX, objectY] = [this.#x, this.#y];
-
-        const region1NotTouched = (objectY !== leftPost.y1 && objectX > leftPost.x1) && (this.visible);
-
-        let outsideHit = true;
-        // check outside region of left post
-        if (region1NotTouched) {
-            outsideHit = false;
-            // console.log(`STATE: ${outsideHit}`);
-        }
-
-        if (outsideHit) {
-            this.#dy *= -1;
-        }
-    }
     checkCollisionWith(OtherSprite){
         // checks if a collision occured between 2 sprites
         let collided = false;
-        let bothSpritesVisible = this.visible && OtherSprite.getVisibility();
+        let bothSpritesVisible = this.#visible && OtherSprite.getVisibility();
         
         if (bothSpritesVisible){
             const BOUNDS = {
@@ -470,6 +442,9 @@ export class Sprite {
             this.hide();
         }
     }
+
+    
+
 }
                     
                     

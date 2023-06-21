@@ -157,10 +157,11 @@ export class Ball extends Sprite {
         // helper function to abstract reacting to the ball so we can time reactions
         // handles all ball collisions 
         let collidedPLayer1 = this.checkCollisionWith(this.#player1);
-        let collidedPLayer2 = false;
+        console.log(this.#player2.getXPos());
+        let collidedPLayer2 = this.checkCollisionWith(this.#player2);
         let playerSpeed;
-        const minVelocityThresh = 5.5;
         // let collidedPLayer2 = this.checkCollisionWith(this.#player2);
+        const minVelocityThresh = 5.5;
 
         if (collidedPLayer1){
             playerSpeed = Math.max(this.#player1.getSpeed(),minVelocityThresh);
@@ -181,8 +182,6 @@ export class Ball extends Sprite {
         // alters the trajectory of the ball when a collision occures with either player1 or player2 
         // ( ! ) reactiveate check 2
         this.#handleCollision();
-        // check for collision with border
-        this.outsidePostHit();
 
     }
 }
