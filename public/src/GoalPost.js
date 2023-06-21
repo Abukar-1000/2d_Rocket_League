@@ -150,13 +150,46 @@ export class GoalPost {
         );
 
         let collidesWithBack = this.#backPost.checkCollisionWith(otherSprite);
-        if (collisionWithSides){
+        const PADDING = 10;
+        const impactLoss = 0.48;
+
+        if (this.#bottomPost.checkCollisionWith(otherSprite)){
             console.log("collides with side")
             // invert their y velocity & speed them up a bit
-            otherSprite.setDy(otherSprite.getDy() * -0.2);
-        } else if (collidesWithBack){
+            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
+            otherSprite.setY(otherSprite.getYPos() + PADDING);
+        
+        }
+        else if (this.#topPost.checkCollisionWith(otherSprite)){
+            console.log("collides with side")
+            // invert their y velocity & speed them up a bit
+            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
+            otherSprite.setY(otherSprite.getYPos() - PADDING);
+        
+        }
+        else if (this.#bottomPost.checkCollisionWith(otherSprite)){
+            console.log("collides with side")
+            // invert their y velocity & speed them up a bit
+            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
+            otherSprite.setY(otherSprite.getYPos() - PADDING);
+        
+        }
+        else if (this.#bottomPost.checkCollisionWith(otherSprite)){
+            console.log("collides with side")
+            // invert their y velocity & speed them up a bit
+            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
+            otherSprite.setY(otherSprite.getYPos() - PADDING);
+        
+        }
+        else if (collidesWithBack){
             console.log("collides with bottomd")
-            otherSprite.setDx(otherSprite.getDx() * -0.2);
+            otherSprite.setDx(otherSprite.getDx() * -impactLoss);
+
+            if (this.#goalType === "left"){
+                otherSprite.setX(otherSprite.getXPos() + PADDING);
+            } else {
+                otherSprite.setX(otherSprite.getXPos() - PADDING);
+            }
         }
 
     }
