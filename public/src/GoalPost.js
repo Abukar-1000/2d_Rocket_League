@@ -70,7 +70,7 @@ export class GoalPosts extends Sprite {
     }
 }
 
-
+// ive allowed overlaps between the player sprites so that if the ball is near by than collisions only happen between ball and player, and not ball to player and player to player
 export class GoalPost {
 
     #backPost;
@@ -80,6 +80,7 @@ export class GoalPost {
     #minChange;
     #player1;
     #player2;
+    #scene;
     #ball;
     // remove x, y
     constructor(scene, player1, player2, ball, goalType){
@@ -89,19 +90,21 @@ export class GoalPost {
         this.#backPost = new Sprite(scene, "postBack.png", 10, 200);
         this.#topPost = new Sprite(scene, "postSide.png", 150, 10);
         this.#bottomPost = new Sprite(scene, "postSide.png", 150, 10);
-
-        // 
+        
+        // add refference to other objects
+        this.#scene = scene;
         this.#player1 = player1;
         this.#player2 = player2;
         this.#ball = ball;
+
         // this makes it seem like the goal post is not moving, will help rotate later
         this.#minChange = 0.0000000000001;
         // specify left or right goal
         this.#goalType = goalType;
-        
         this.#initializeNet();
         
     }
+
     #initializeNet(){
         // place the goal on screen based on if the goal is a left goal or a right goal
         if (this.#goalType === "left"){
@@ -128,6 +131,13 @@ export class GoalPost {
             this.#bottomPost.setPosition(905,350);
             this.#bottomPost.changeAngleBy(180 - this.#bottomPost.getImageAngle());
         }
+    }
+    #recenterPlayers(){
+        // resets the players positions when a goal is scored
+        this.#player1.setPosition(200,200);
+        this.#player2.setPosition(700,200);
+        this.#ball.setPosition(450,200);
+        player2.changeAngleBy(180);
     }
     #stopGoalFromMoving(){
         // minimizes dx and dy to keep the goal stationary
@@ -160,36 +170,37 @@ export class GoalPost {
             otherSprite.setY(otherSprite.getYPos() + PADDING);
         
         }
-        else if (this.#topPost.checkCollisionWith(otherSprite)){
+        
+        if (this.#topPost.checkCollisionWith(otherSprite)){
             console.log("collides with side")
             // invert their y velocity & speed them up a bit
             otherSprite.setDy(otherSprite.getDy() * -impactLoss);
             otherSprite.setY(otherSprite.getYPos() - PADDING);
         
         }
-        else if (this.#bottomPost.checkCollisionWith(otherSprite)){
-            console.log("collides with side")
-            // invert their y velocity & speed them up a bit
-            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
-            otherSprite.setY(otherSprite.getYPos() - PADDING);
-        
-        }
-        else if (this.#bottomPost.checkCollisionWith(otherSprite)){
-            console.log("collides with side")
-            // invert their y velocity & speed them up a bit
-            otherSprite.setDy(otherSprite.getDy() * -impactLoss);
-            otherSprite.setY(otherSprite.getYPos() - PADDING);
-        
-        }
-        else if (collidesWithBack){
+
+        // if collides with back then we know a goal was scored
+        if (collidesWithBack){
             console.log("collides with bottomd")
             otherSprite.setDx(otherSprite.getDx() * -impactLoss);
 
             if (this.#goalType === "left"){
                 otherSprite.setX(otherSprite.getXPos() + PADDING);
+
+                // handle goal
+                this.#player2.incrementGoalScored();
+                this.#scene.updateScoreBoard(this.#player1, this.#player2);
             } else {
                 otherSprite.setX(otherSprite.getXPos() - PADDING);
+                
+                // handle goal
+                this.#player1.incrementGoalScored();
+                this.#scene.updateScoreBoard(this.#player1, this.#player2);
             }
+
+            // recenter players and ball
+            this.#recenterPlayers();
+
         }
 
     }

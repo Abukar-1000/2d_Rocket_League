@@ -14,6 +14,7 @@ class Scene {
     #height;
     #left;
     #top;
+    #scoreBoardRegion;
     // initialize data
     constructor(width, height, keyboard, mouse){
         Scene.canvas.style.backgroundColor = "grey";
@@ -21,18 +22,31 @@ class Scene {
         document.body.appendChild(Scene.canvas);
         this.#context = Scene.canvas.getContext("2d");
 
+
         // if values are not set
         if (width == null || height == null){
             this.setSize(900, 500);
         }
 
+        // position of the score board
+        this.#scoreBoardRegion = {
+            x: 5,
+            y: 30
+        }
         // create pointers to global instances of the keyboard and mouse so state can be shared 
         this.keyboard = keyboard;
         this.mouse = mouse;
+
+        this.#initializeScoreBoard();
     }
 
     // private methods
-    
+    #initializeScoreBoard(){
+        // sets initial values for the score board
+        const INIT_VALUE = 0;
+        let scoreDetails = `P1: ${INIT_VALUE} | P2: ${INIT_VALUE}`;
+        this.#context.fillText(scoreDetails, this.#scoreBoardRegion.x, this.#scoreBoardRegion.y);
+    }
     // public methods
     start(updateCallbackFunction){
         // takes in a user defined callback, to change other states of the game
@@ -86,6 +100,25 @@ class Scene {
     getCanvas(){
         // gives access to the static canvas DOM element
         return Scene.canvas;
+    }
+
+    updateScoreBoard(player1Score, player2Score){
+        // updates the score board when a goal is scored
+
+        // graphic initialization
+        this.#context.fillStyle = "black";
+        this.#context.strokeStyle = "black";
+        this.#context.lineWidth = "10";
+        this.#context.font = "18pt sans-serif";
+        const [WIDTH, HEIGHT] = [100, 100];
+        // clear old values
+        this.#context.clearRect(this.#scoreBoardRegion.x,this.#scoreBoardRegion.y, WIDTH, HEIGHT);
+        
+        // write new values after 100ms timeout
+        const PADDING = "       ";
+        let scoreDetails = `P1: ${player1Score} ${PADDING} P2: ${player2Score}`;
+        this.#context.fillText(scoreDetails, this.#scoreBoardRegion.x, this.#scoreBoardRegion.y);
+        
     }
 }
 

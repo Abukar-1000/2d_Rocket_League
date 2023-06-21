@@ -1,23 +1,6 @@
 import { Sprite } from "./Sprite.js";
 
 export class Ball extends Sprite {
-    // #scene;
-    // #canvas;
-    // #context;
-    // #image
-    // #width
-    // #height
-    // #cHeight;
-    // #cWidth;
-    // #x 
-    // #y 
-    // #dx 
-    // #dy 
-    // #imgAngle 
-    // #moveAngle 
-    // #speed 
-    // #visible 
-    // #boundAction
     #player1;
     #player2;
     #RETENTION_AFTER_FRICTION;

@@ -2,9 +2,10 @@ import { Sprite } from "./Sprite.js";
 
 export class Car extends Sprite {
 
-    #keyboard
+    #keyboard;
     #keyboardState;
-    #playerType
+    #playerType;
+    #goalsScored;
     constructor(scene, image, width, height, keyboard, playerType){
         // keep refference to keyboard in memory, so we reduce copying data
         super(scene, image, width, height);
@@ -13,6 +14,9 @@ export class Car extends Sprite {
         
         // set either player 1 or player 2
         this.#playerType = playerType;
+
+        // initialize with 0 goals
+        this.#goalsScored = 0;
     }
     control(){
         const MAX_SPEED = 1.2;
@@ -33,10 +37,10 @@ export class Car extends Sprite {
             if (this.#keyboardState[this.#keyboard.KEY_S]){
                 this.changeSpeedBy(-1);
             }
-            if (this.#keyboardState[this.#keyboard.KEY_A]){
+            if (this.#keyboardState[this.#keyboard.KEY_D]){
                 this.changeAngleBy(6);
             }
-            if (this.#keyboardState[this.#keyboard.KEY_D]){
+            if (this.#keyboardState[this.#keyboard.KEY_A]){
                 this.changeAngleBy(-6);
             }
         }
@@ -64,5 +68,17 @@ export class Car extends Sprite {
             }
         }
         
+    }
+    incrementGoalScored(){
+        // increments the goal tally when a player scores a goal
+        this.#goalsScored++;
+    }
+    getGoalsScored(){
+        // returns the ammount of goals this player scores. Meant for keeping update the score board.
+        return this.#goalsScored; 
+    }
+    getPlayerType(){
+        // returns whether this is player 1 or player 2
+        return this.#playerType;
     }
 }

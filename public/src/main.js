@@ -46,7 +46,7 @@ function init() {
     // car positions
     player1.setPosition(200,200);
     player2.setPosition(700,200);
-    
+    player2.changeAngleBy(180);
     // set up event listeners
     keyboard.updateState(document)
     mouse.updateState(document)
@@ -68,6 +68,9 @@ function main() {
     scene.clearScreen();
     leftGoalPost.update();
     rightGoalPost.update();
+
+    // refresh the score board
+    scene.updateScoreBoard(player1.getGoalsScored(), player2.getGoalsScored());
     player1.update();
     player2.update();
     ball.update();
