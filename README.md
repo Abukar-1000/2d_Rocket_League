@@ -20,7 +20,7 @@ For each class or file used here is the functional documentation:
 # Game Design
 
 ### Overview
-In this game there really only is 1 scene, the main scene. For this reason I decided to encapsulate this </br> inside the file main.js. Hence the name main. In the main scene we will first initialize all our </br> class instances globally using the var keyword. I am doing this because I am initializing all </br> instances in the function `init()`, therefore I would like them to be available globally. </br> 
+In this game there really only is one scene, the main scene. For this reason I decided to encapsulate this </br> inside the file main.js. Hence the name main. In the main scene we will first initialize all our </br> class instances globally using the var keyword. I am doing this because I am initializing all </br> instances in the function `init()`, therefore I would like them to be available globally. </br> 
 Here is a list of all the classes Ill be using in game:
 * GoalPost.js
 * Car.js
@@ -106,7 +106,7 @@ goal before it hits the back of the net.
 Lastly, the only events that cause a state change to the car class is either:
 * User input to change the car's trajectory.
 * The car colliding with the borders of the canvas.
- 
+
 ### Ball.js
 Encapsulates all the functionalities required by a ball in the game. The ball will be </br>
 the most reactive game element in my game. For this reason, I expect the majority of </br>
@@ -117,8 +117,21 @@ Here are the functionalities:
     * After colliding with another game object the ball will either invert its dx or dy.
 * Handle Collisions
 
-Lastly, contrary to all the other classes, the state of the `Ball` class is updated in </br>
-the `react()` method. I just personally think
+Lastly, the state of the ball is only altered when the ball collides with the following:
+* The edge of the canvas.
+* One of the players.
+* One of the goal posts.
+
+# Software Engineering Plan
+| Day                                                                     | Task                                                             |
+|-------------------------------------------------------------------------|------------------------------------------------------------------|
+| Thursday                                                                |<img src="public/checkMark.png" width="25" height="25">           |
+| Friday |<img src="public/checkMark.png" width="25" height="25">           |
+| Saturday                            |<img src="public/checkMark.png" width="25" height="25">           |
+| Sunday                                                |<img src="public/checkMark.png" width="25" height="25">           |
+| Monday                                                     |<img src="public/checkMark.png" width="25" height="25">           |
+| Tuesday                                                      |<img src="public/checkMark.png" width="25" height="25">           |
+| Wednesday                                                      |<img src="public/checkMark.png" width="25" height="25">           |
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
