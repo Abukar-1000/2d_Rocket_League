@@ -180,6 +180,7 @@ Here are the controles for the game. Keep in mind that this is intended to be a 
 Unfortunately, I ran out of time and could not implement a 2 player online game lobby. I do plan</br>
 on doing this in the near future. Here are the steps I'll take:
 </br>
+
 - Connect a socket to listen on the current port. ( Already implemented, see Server.js file. )
 - Once a user visits the page, I will use Socket.io-client to connect to the instance running on the backend. </br>
 - On every connection the user will be assigned an ID.
