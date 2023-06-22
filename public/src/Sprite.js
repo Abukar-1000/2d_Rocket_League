@@ -67,7 +67,6 @@ export class Sprite {
     }
 
     // draw frame
-
     #draw(){
         // method to draw the internal state of the sprite onto the canvas
         // need to find a way to implement a friend function like in cpp
@@ -410,8 +409,6 @@ export class Sprite {
             this.hide();
         }
     }
-
-    
 
 }
                     

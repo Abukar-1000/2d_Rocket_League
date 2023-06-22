@@ -164,7 +164,6 @@ export class GoalPost {
         const impactLoss = 0.48;
 
         if (this.#bottomPost.checkCollisionWith(otherSprite)){
-            console.log("collides with side")
             // invert their y velocity & speed them up a bit
             otherSprite.setDy(otherSprite.getDy() * -impactLoss);
             otherSprite.setY(otherSprite.getYPos() + PADDING);
@@ -172,7 +171,6 @@ export class GoalPost {
         }
         
         if (this.#topPost.checkCollisionWith(otherSprite)){
-            console.log("collides with side")
             // invert their y velocity & speed them up a bit
             otherSprite.setDy(otherSprite.getDy() * -impactLoss);
             otherSprite.setY(otherSprite.getYPos() - PADDING);
@@ -181,7 +179,6 @@ export class GoalPost {
 
         // if collides with back then we know a goal was scored
         if (collidesWithBack){
-            console.log("collides with bottomd")
             otherSprite.setDx(otherSprite.getDx() * -impactLoss);
 
             if (this.#goalType === "left"){
@@ -205,7 +202,7 @@ export class GoalPost {
 
     }
     update(){
-        
+
         this.#stopGoalFromMoving();
         this.#initializeNet();
 

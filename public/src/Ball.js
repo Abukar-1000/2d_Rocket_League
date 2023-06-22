@@ -93,34 +93,20 @@ export class Ball extends Sprite {
         const POSITION_PADDING = 5;
 
         if (ballYPos < playerYPos){
-            console.log("top");
             this.#FLAGS.offTop = true;
-            // this.setY(ballYPos + POSITION_PADDING);
         }
         
         if (ballYPos > playerYPos){
-            console.log("bottom");
             this.#FLAGS.offBottom = true;
-            // this.setY(ballYPos - POSITION_PADDING);
         }
         if (ballXPos < playerXPos){
-            console.log("left");
             this.#FLAGS.offLeft = true;
-            // this.setX(ballXPos - POSITION_PADDING);
         }
         
         if (ballXPos > playerXPos){
-            console.log("Right");
             this.#FLAGS.offRight = true;
-            // this.setX(ballXPos + POSITION_PADDING);
         }
 
-        if (this.#FLAGS.offTop || this.#FLAGS.offBottom){
-            dy *= -1;
-        }
-        if (this.#FLAGS.offLeft || this.#FLAGS.offRight){
-            dx *= -1;
-        }
 
         const ballXVelocity = this.getDx() * this.getXPos();
         const ballYVelocity = this.getDy() * this.getYPos();
@@ -130,17 +116,15 @@ export class Ball extends Sprite {
         const relativeYVelocity = ballYVelocity - carYVelocity;
         
         let angle = Math.atan2(relativeYVelocity, relativeXVelocity);
-        this.changeAngleBy(this.getMotionAngle() + angle);
+        this.changeAngleBy(angle - this.getMotionAngle());
 
         
-        // this.reactToBounce(this.#FLAGS);
         this.#resetFlags();
     }
     #handleCollision(){
         // helper function to abstract reacting to the ball so we can time reactions
         // handles all ball collisions 
         let collidedPLayer1 = this.checkCollisionWith(this.#player1);
-        console.log(this.#player2.getXPos());
         let collidedPLayer2 = this.checkCollisionWith(this.#player2);
         let playerSpeed;
         // let collidedPLayer2 = this.checkCollisionWith(this.#player2);
@@ -148,7 +132,6 @@ export class Ball extends Sprite {
 
         if (collidedPLayer1){
             playerSpeed = Math.max(this.#player1.getSpeed(),minVelocityThresh);
-            console.log(`speed: ${playerSpeed}`);
             let refVec = ( 2 * playerSpeed * this.#RETENTION_AFTER_FRICTION ) * this.#RETENTION_AFTER_FRICTION * 1.4;
             this.setSpeed(refVec);
             this.#handleBounce(this.#player1);
