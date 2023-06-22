@@ -8,10 +8,19 @@ body > * {
     margin: 0;
 }
 
-.title {
+.heading {
     margin-top: 10vh;
     margin-bottom: 4vh;
+}
+
+.title {
     font-size: 3.5vw;
     font-family: 'Share Tech Mono', monospace;
+    display: inline;
+    padding-right: 2vw;
+}
+
+.ballImg{
+    display: inline-block;
 }
 
