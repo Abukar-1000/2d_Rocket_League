@@ -122,7 +122,7 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 * One of the players.
 * One of the goal posts.
 
-# Software Engineering Plan
+# Software Engineering Plan <img src="public/logos/game-plan.png" width="25" height="25">
 * Thursday
     - Map out classes & Relationships
     - Get a general idea of required class behavior.
