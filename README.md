@@ -8,14 +8,14 @@ Please click [HERE](https://frantic-pocketbook-seal.cyclic.app/) to take a look.
 
 For each class or file used here is the functional documentation:
 
-* Main.js
-* Scene.js
-* Keyboard.js
-* Mouse.js
-* Sprite.js
-* GoalPost.js
-* Car.js
-* Ball.js
+* [Main.js](ducumentation/Main.md)
+* [Scene.js](ducumentation/Main.md)
+* [Keyboard.js](ducumentation/Keyboard.js)
+* [Mouse.js](ducumentation/Main.md)
+* [Sprite.js](ducumentation/Main.md)
+* [GoalPost.js](ducumentation/Main.md)
+* [Car.js](ducumentation/Main.md)
+* [Ball.js](ducumentation/Main.md)
 
 # Game Design <img src="public/logos/game-plan.png" width="35" height="35">
 
