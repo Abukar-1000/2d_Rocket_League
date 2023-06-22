@@ -60,10 +60,10 @@ export class Car extends Sprite {
             if (this.#keyboardState[this.#keyboard.KEY_DOWN]){
                 this.changeSpeedBy(-1);
             }
-            if (this.#keyboardState[this.#keyboard.KEY_RIGHT]){
+            if (this.#keyboardState[this.#keyboard.KEY_LEFT]){
                 this.changeAngleBy(6);
             }
-            if (this.#keyboardState[this.#keyboard.KEY_LEFT]){
+            if (this.#keyboardState[this.#keyboard.KEY_RIGHT]){
                 this.changeAngleBy(-6);
             }
         }
