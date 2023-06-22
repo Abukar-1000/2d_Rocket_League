@@ -125,7 +125,7 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 # Software Engineering Plan
 EngineeringPlan.png
 <img src="public/documentation/EngineeringPlan1.png" width="900" height="600">
-<img src="public/documentation/EngineeringPlan2.png" width="900" height="600">
+<img src="public/documentation/EngineeringPlan2.PNG" width="900" height="600">
 
 
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
