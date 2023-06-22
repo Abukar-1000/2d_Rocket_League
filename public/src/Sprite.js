@@ -27,8 +27,8 @@ export class Sprite {
     #moveAngle 
     #speed 
     #visible
-    #FRICTION_REDUCTION 
     #boundAction 
+    #FRICTION_REDUCTION 
 
     // initialize attributes
     constructor(scene, imageFile, width, height){
@@ -48,37 +48,6 @@ export class Sprite {
         this.#visible = true;
         this.#boundAction = BOUNDARY_ACTIONS.BOUNCE;
         this.camera = false;
-        // recalculate post dimensions
-        // let midpoint = 250;
-        // this.postPostitions = {
-        //     leftPost: {
-        //         x1: this.#width,
-        //         y1: midpoint - this.#height,
-
-        //         x2: 5,
-        //         y2: midpoint - this.#height,
-                
-        //         x3: 5,
-        //         y3: midpoint + this.#height,
-                
-        //         x4: this.#width,
-        //         y4: midpoint + this.#height,
-        //     },
-            
-        //     rightPost: {
-        //         x1: 900 - this.#width,
-        //         y1: midpoint - this.#height,
-                
-        //         x2: 895,
-        //         y2: midpoint - this.#height,
-                
-        //         x3: 895,
-        //         y3: midpoint + this.#height,
-                
-        //         x4: 900 - this.#width,
-        //         y4: midpoint + this.#height,
-        //     }
-        // };
 
         // movement
         this.#x = 100;
@@ -125,7 +94,6 @@ export class Sprite {
         currentSpeed = Math.max(currentSpeed, minVelocityThresh);
         this.setSpeed(currentSpeed);
     }
-    // remove obj
     #checkBounds() {
         // private helper method to check if we have hit the bounds of the canvas
         

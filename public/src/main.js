@@ -54,14 +54,6 @@ function init() {
     
 }
 
-function applyFriction(){
-    const FRICTION_REDUCTION_FOR_BALL = 0.78;
-    const FRICTION_REDUCTION_FOR_CAR = 0.76;
-    ball.setSpeed(ball.getSpeed() * FRICTION_REDUCTION_FOR_BALL);
-    player1.setSpeed(player1.getSpeed() * FRICTION_REDUCTION_FOR_CAR);
-
-}
-
 
 // this is the update function
 function main() {

@@ -8,11 +8,11 @@ Please click [HERE](https://frantic-pocketbook-seal.cyclic.app/) to take a look.
 
 For each class or file used here is the functional documentation:
 
-* [Main.js](public/ducumentation/Main.md)
-* [Scene.js](public/ducumentation/Main.md)
-* [Keyboard.js](public/ducumentation/Keyboard.js)
-* [Mouse.js](public/ducumentation/Main.md)
-* [Sprite.js](public/ducumentation/Main.md)
+* [Main.js](public/documentation/Main.md)
+* [Scene.js](public/documentation/Scene.md)
+* [Keyboard.js](public/documentation/Keyboard.md)
+* [Mouse.js](public/documentation/Mouse.md)
+* [Sprite.js](public/documentation/Sprite.md)
 * [GoalPost.js](public/ducumentation/Main.md)
 * [Car.js](public/ducumentation/Main.md)
 * [Ball.js](public/ducumentation/Main.md)
