@@ -152,7 +152,7 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 
 ### State Transition Diagram
 
-## Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="391" height="351">
+## Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="544" height="1863">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
 * Car Images:
