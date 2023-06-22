@@ -123,15 +123,10 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 * One of the goal posts.
 
 # Software Engineering Plan
-| Day                                                                     | Task                                                             |
-|-------------------------------------------------------------------------|------------------------------------------------------------------|
-| Thursday                                                                |<img src="public/checkMark.png" width="25" height="25">           |
-| Friday |<img src="public/checkMark.png" width="25" height="25">           |
-| Saturday                            |<img src="public/checkMark.png" width="25" height="25">           |
-| Sunday                                                |<img src="public/checkMark.png" width="25" height="25">           |
-| Monday                                                     |<img src="public/checkMark.png" width="25" height="25">           |
-| Tuesday                                                      |<img src="public/checkMark.png" width="25" height="25">           |
-| Wednesday                                                      |<img src="public/checkMark.png" width="25" height="25">           |
+EngineeringPlan.png
+<img src="public/documentation/EngineeringPlan.PNG" width="600" height="400">
+
+
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
