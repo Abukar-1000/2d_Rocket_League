@@ -13,9 +13,9 @@ For each class or file used here is the functional documentation:
 * [Keyboard.js](public/documentation/Keyboard.md)
 * [Mouse.js](public/documentation/Mouse.md)
 * [Sprite.js](public/documentation/Sprite.md)
-* [GoalPost.js](public/ducumentation/Main.md)
-* [Car.js](public/ducumentation/Main.md)
-* [Ball.js](public/ducumentation/Main.md)
+* [GoalPost.js](public/documentation/GoalPost.md)
+* [Car.js](public/documentation/Car.md)
+* [Ball.js](public/documentation/Ball.md)
 
 # Game Design <img src="public/logos/game-plan.png" width="35" height="35">
 

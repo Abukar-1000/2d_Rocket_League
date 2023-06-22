@@ -69,7 +69,6 @@ function main() {
     ball.react();
     player1.control();
     player2.control();
-    // console.log(player1.getSpeed(), ball.getSpeed())
 }
 
 // runs app when document has loaded 

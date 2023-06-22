@@ -1,4 +1,4 @@
-# Mouse.js
+# GoalPost.js
 <h1>This class encapsulates all the functionality required from a goal post.</h1>
 
 ## Private Attributes
@@ -14,25 +14,23 @@
 
 ## Private Methods
 
+### `initializeNet()`
+* Place the goal on screen based on if the goal is a left goal or a right goal.
+
+### `recenterPlayers()`
+* Resets the players positions when a goal is scored.
+
+### `stopGoalFromMoving()`
+* Minimizes dx and dy to keep the goal stationary.
+
+### `handleCollision( otherSprite )`
+* Handles the collisions of various object with respect to the goal post on the screen.
+
+## Public Methods
 ### `constructor( scene, player1, player2, ball, goalType )`
 * Constructor responsiable for initializing the GoalPost instance.
 * Binary tree like class which represents a goal post.
 * Constructed with a left post, right post, and back post ( parent ) all are instances in this class.
 
-### `updateState( document )`
-* Simply updates the state of the mouse based on the user input.
-* Given a refference to the document attaches event listeners on the following events:
-    * `onmousemove( event )`: Event triggered when the mouse moves accross the screen.
-    * `onmousedown( event )`: Event triggered when the mouse button is pressed in but not released.
-    * `onmouseup( event )`: Event triggered when the mouse button finally released.
-
-### `getMouseX()`
-* Returns the value of the private x position of the mouse.
-
-### `getMouseY()`
-* Returns the value of the private y position of the mouse.
-
-### `getMouseClicked()`
-* Returns the current state of whether the mouse was clicked.
-
-## Public Methods
+### `update()`
+* Updates the current state of the goal, so it can be responsive in game.

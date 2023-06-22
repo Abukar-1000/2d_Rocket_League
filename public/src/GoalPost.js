@@ -205,7 +205,7 @@ export class GoalPost {
 
     }
     update(){
-
+        
         this.#stopGoalFromMoving();
         this.#initializeNet();
 

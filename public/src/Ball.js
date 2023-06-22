@@ -31,7 +31,7 @@ export class Ball extends Sprite {
     }
 
     #bounceBall(playerPosition){
-        // based on where the ball was comming from inverts dx and dy or increases it
+        // based on where the ball was comming from inverts dx and dy and alters position.
         
         const speedUpFactor = 3.5;
         const POSITION_PADDING = 3;
