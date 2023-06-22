@@ -29,7 +29,7 @@ Here is a list of all the classes Ill be using in game:
 Since `Main.js` has been covered already, I will now explain the rest. Lastly no game object dies, due</br>
 to the nature of Rocket League.
 
-### GoalPost.js <img src="public/logos/goal-post.png" width="20" height="20">
+### GoalPost.js <img src="public/logos/goal-post.png" width="40" height="20">
 Encapsulates all the functionality of a goal post in a rocket league match. There will be two instacnce </br> 
 of the `GoalPost` class. The first will represent the left goal post, the second will represent the right </br>
 goal post. Furthermore, `player1` will be assigned to the left goal post, and `player2` will be assigned to the </br>
@@ -51,7 +51,7 @@ Here are the encapsulated functionalities:
 
 All of the above functionality will be abstracted away in the `update()` function.
 
-### Car.js <img src="public/ySportsCar.png" width="25" height="35">
+### Car.js <img src="public/ySportsCar.png" width="45" height="25">
 Encapsulates all the fucntionalities of a car in Rocket League. Furthermore, is </br>
 a child of the `Sprite` class, which allows it to inherit a lot of usefull features </br>
 from the `Sprite` class. These faeatures include: </br>
