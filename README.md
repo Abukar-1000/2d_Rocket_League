@@ -123,9 +123,32 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 * One of the goal posts.
 
 # Software Engineering Plan
-EngineeringPlan.png
-<img src="public/documentation/EngineeringPlan1.png" width="300" height="200">
-<img src="public/documentation/EngineeringPlan2.PNG" width="300" height="200">
+* Thursday
+    - Map out classes & Relationships
+    - Get a general idea of required class behavior.
+* Friday
+    - Finalize rough sketch for classes.
+    - Get a general idea of required state change.
+    - Map out potential effects.
+* Saturday
+    - Implement base classses.
+    - Try to have basic functionality working. 
+* Sunday
+    - Implement ball collision detection.
+    - Implement goal posts graphically.
+* Monday
+    - Finish Goal implementation.
+    - Implement goal detection, and handle goal event.
+    - Implement score board.
+    - Verify game functionality.
+* Tuesday
+    - Buffer day to handle bugs or to catch up to speed.
+    - If game is fully functional, implement a 2 player online lobby.
+    - Implement sockets using Socket.io in JavaScript.
+* Wednesday
+    - Resolve any remaining bugs.
+    - Finalize documentation.
+    - Deploy site.
 
 
 ## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
