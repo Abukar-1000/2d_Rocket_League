@@ -4,7 +4,7 @@
 This is my implementation of a 2D version of Rocket League. </br>
 Please click [HERE](https://frantic-pocketbook-seal.cyclic.app/) to take a look.
 
-## Technical Documentation
+## Technical Documentation <img src="public/logos/implementation.png" width="35" height="35">
 
 For each class or file used here is the functional documentation:
 
@@ -17,7 +17,7 @@ For each class or file used here is the functional documentation:
 * Car.js
 * Ball.js
 
-# Game Design
+# Game Design <img src="public/logos/game-plan.png" width="35" height="35">
 
 ### Overview
 In this game there really only is one scene, the main scene. For this reason I decided to encapsulate this </br> inside the file main.js. Hence the name main. In the main scene we will first initialize all our </br> class instances globally using the var keyword. I am doing this because I am initializing all </br> instances in the function `init()`, therefore I would like them to be available globally. </br> 
@@ -122,7 +122,7 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
 * One of the players.
 * One of the goal posts.
 
-# Software Engineering Plan <img src="public/logos/game-plan.png" width="35" height="35">
+# Software Engineering Plan <img src="public/logos/engineer.png" width="35" height="35">
 * Thursday
     - Map out classes & Relationships
     - Get a general idea of required class behavior.
@@ -150,8 +150,9 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
     - Finalize documentation.
     - Deploy site.
 
+### State Transition Diagram
 
-## Credits  &ensp; <img src="public/logos/credit.png" width="25" height="25">
+## Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="391" height="351">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
 * Car Images:
