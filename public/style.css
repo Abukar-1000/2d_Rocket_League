@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    text-align: center;
+}
+
+body > * {
+    margin: 0;
+}
+
+.title {
+    margin-top: 10vh;
+    margin-bottom: 4vh;
+    font-size: 3.5vw;
+    font-family: 'Share Tech Mono', monospace;
+}
+
