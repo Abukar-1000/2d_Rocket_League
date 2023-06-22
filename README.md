@@ -9,13 +9,13 @@ Please click [HERE](https://frantic-pocketbook-seal.cyclic.app/) to take a look.
 For each class or file used here is the functional documentation:
 
 * [Main.js](public/documentation/Main.md)
-* [Scene.js](public/documentation/Scene.md)
-* [Keyboard.js](public/documentation/Keyboard.md)
-* [Mouse.js](public/documentation/Mouse.md)
 * [Sprite.js](public/documentation/Sprite.md)
 * [GoalPost.js](public/documentation/GoalPost.md)
+* [Scene.js](public/documentation/Scene.md)
 * [Car.js](public/documentation/Car.md)
 * [Ball.js](public/documentation/Ball.md)
+* [Keyboard.js](public/documentation/Keyboard.md)
+* [Mouse.js](public/documentation/Mouse.md)
 
 # Game Design <img src="public/logos/game-plan.png" width="35" height="35">
 
@@ -161,7 +161,8 @@ The only prerequisites are:
 - A keyboard to interact with the game.
 
 </br>
-Here are the controles for the game. Keep in mind that this is intended to be a two player local </br> game.
+Here are the controles for the game. Keep in mind that this is intended to be a two player local 
+</br> game.
 
 * Player 1
     * `W`: Go forward.
@@ -176,6 +177,19 @@ Here are the controles for the game. Keep in mind that this is intended to be a 
     * `Right Arrow`: Turn right.
     * `Left Arrow`: Turn Left.
 </br>
+Unfortunately, I ran out of time and could not implement a 2 player online game lobby. I do plan</br>
+on doing this in the near future. Here are the steps I'll take:
+</br>
+- Connect a socket to listen on the current port. ( Already implemented, see Server.js file. )
+- Once a user visits the page, I will use Socket.io-client to connect to the instance running on the backend. </br>
+- On every connection the user will be assigned an ID.
+    - First player to join will be connected as `player1`.
+    - Second player to join will be connected as `player2`.
+- Each connection will be stored in a JS array. 
+    - Once the array length reaches 2 players, stop accepting connections.
+    - This will close the lobby.
+- If one of the players disconnect, the lobby will allow another player to join in their place.
+- Players can leave at any point in time.
 
 
 # Credits  &ensp; <img src="public/logos/credit.png" width="35" height="35">
