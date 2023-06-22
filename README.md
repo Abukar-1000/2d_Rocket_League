@@ -150,15 +150,39 @@ Lastly, the state of the ball is only altered when the ball collides with the fo
     - Finalize documentation.
     - Deploy site.
 
-### State Transition Diagram
+# State Transition Diagram
+
+
+# Installation Notes <img src="public/logos/installation.png" width="35" height="35">
+
+Due to the versitile nature of the internet there is hardly anything needed from you the user. </br>
+The only prerequisites are:
+- A stable connection just to load the page. Once the page is loaded, an internet connection is </br> is not necisary.
+- A keyboard to interact with the game.
+
+</br>
+Here are the controles for the game. Keep in mind that this is intended to be a two player local </br> game.
+
+* Player 1
+    * `W`: Go forward.
+    * `S`: Stop or go backward.
+    * `D`: Turn right.
+    * `A`: Turn Left.
+</br>
+
+* Player 2
+    * `UP Arrow`: Go forward.
+    * `Down Arrow`: Stop or go backward.
+    * `Right Arrow`: Turn right.
+    * `Left Arrow`: Turn Left.
+</br>
+
 
 ## Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="544" height="1863">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
 * Car Images:
     * <a href="https://stock.adobe.com/Library/urn:aaid:sc:US:d7f9259d-5e63-427c-823d-a217f93a4126?asset_id=281630869">Licensed from Adobe Stock</a>
-
-    * https://stock.adobe.com/Library/urn:aaid:sc:US:d7f9259d-5e63-427c-823d-a217f93a4126?asset_id=523748734
 * Soccer Ball:
     * <a href="https://stock.adobe.com/Library/urn:aaid:sc:US:d7f9259d-5e63-427c-823d-a217f93a4126?asset_id=281630869">Licensed from Adobe Stock</a>
 * Goal Post Images:
