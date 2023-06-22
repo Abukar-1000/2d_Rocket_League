@@ -51,7 +51,7 @@ Here are the encapsulated functionalities:
 
 All of the above functionality will be abstracted away in the `update()` function.
 
-### Car.js <img src="public/ySportsCar.png" width="45" height="25">
+### Car.js <img src="public/ySportsCar.png" width="40" height="25">
 Encapsulates all the fucntionalities of a car in Rocket League. Furthermore, is </br>
 a child of the `Sprite` class, which allows it to inherit a lot of usefull features </br>
 from the `Sprite` class. These faeatures include: </br>
