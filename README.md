@@ -178,7 +178,7 @@ Here are the controles for the game. Keep in mind that this is intended to be a 
 </br>
 
 
-## Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="544" height="1863">
+# Credits  &ensp; <img src="public/documentation/StateTransition1.png" width="544" height="1863">
 * Icons: 
     * <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by Freepik Flaticon</a>
 * Car Images:
